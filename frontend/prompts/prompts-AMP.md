@@ -49,7 +49,38 @@ checkea por que la nueva interfaz no muestra nada
 
 por consola arroja: No routes matched location "/positions/1" 
 
+---
+> Aquí comencé de nuevo.
+---
+
 ### **Prompt 5:** 
+Eres un desarrollador frontend senior.
+
+anteriormente intenté desarrollar una interfaz, pero no tuve exito. Sin embargo documenté todo el proceso y todos los errores.
+
+para el desarrollo especifico revisa @init.md @frontend-development.md 
+
+para revisar los errores y problemas que tuve revisa la demas info dentro de @docs/ 
+
+el contexto del proyecto y del front en particular lo puedes revisar en los @README.md @README.md 
+
+### **Prompt 6:** 
+no debias modificar lo ya existente. cambiaste el diseño y estilo de la interfaz de posiciones @old-positions.png y al precionar ver proceso arroja error:
+
+onNavigate is not a function
+TypeError: onNavigate is not a function
+    at onClick (http://localhost:3000/static/js/bundle.js:86668:26)
+    at HTMLUnknownElement.callCallback (http://localhost:3000/static/js/bundle.js:49221:18)
+    at Object.invokeGuardedCallbackDev (http://localhost:3000/static/js/bundle.js:49265:20)
+    at invokeGuardedCallback (http://localhost:3000/static/js/bundle.js:49322:35)
+    at invokeGuardedCallbackAndCatchFirstError (http://localhost:3000/static/js/bundle.js:49336:29)
+    at executeDispatch (http://localhost:3000/static/js/bundle.js:53479:7)
+    at processDispatchQueueItemsInOrder (http://localhost:3000/static/js/bundle.js:53505:11)
+    at processDispatchQueue (http://localhost:3000/static/js/bundle.js:53516:9)
+    at dispatchEventsForPlugins (http://localhost:3000/static/js/bundle.js:53525:7)
+    at http://localhost:3000/static/js/bundle.js:53685:16
+
+revisa y arreglalo
 
 ## Conslusiones 🏁
 
