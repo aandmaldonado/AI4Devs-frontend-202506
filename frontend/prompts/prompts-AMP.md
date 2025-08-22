@@ -82,6 +82,73 @@ TypeError: onNavigate is not a function
 
 revisa y arreglalo
 
+---
+> Aquí comencé de nuevo.
+---
+
+### **Prompt 7:**
+Eres un desarrollador fullstack senior.
+
+Necesitas crear una interfaz en un sistema ya existente. Revisa @frontend-development.md para el desarrollo, si lo necesitas puedes revisar el contexto en @README.md del frontend y @README.md general del proyecto. tambien si necesitas revisa @init.md q contiene la informacion oficial de la solicitud
+
+es importante que solo toques la carpeta @frontend/ debes respetar, diseño y estilos, tambien debes adaptar el desarrollo a la estructura de carpetas establecida, no crees carpetas nuevas
+
+Antes de codificar necesito asegurarme de que hayas entendido el requerimiento, describe el plan de trabajo de lo que realizarás en un nuevo archivo llamado requirements.md
+
+### **Prompt 8:**
+necesito que vayas implementando paso a paso, no quiero que desarrolles todo de una vez. es importante que vayamos implementando de a poco y vayamos probando si todo va bien pasamos al siguiente paso
+
+### **Prompt 9:**
+ver proceso no hace nada y sigue el mismo error No routes matched location "/positions/1" 
+
+### **Prompt 10:**
+mismo error. será necesario levantar el back y generar la BD con prisma?
+
+### **Prompt 11:**
+Revisa el error:
+
+ERROR in ./src/services/positionService.ts 3:0-26
+Module not found: Error: Can't resolve 'axios' in '/Users/amaldonadop/Documents/GitHub/AI4Devs-frontend-202506/frontend/src/services'
+ERROR in ./src/services/positionService.ts 3:0-26
+Module not found: Error: Can't resolve 'axios' in '/Users/amaldonadop/Documents/GitHub/AI4Devs-frontend-202506/frontend/src/services'
+ERROR in src/services/positionService.ts:1:19
+TS2307: Cannot find module 'axios' or its corresponding type declarations.
+  > 1 | import axios from 'axios';
+      |                   ^^^^^^^
+    2 |
+    3 | // Tipos para la API
+    4 | export interface InterviewStep {
+
+### **Prompt 12:**
+Revisa el error:
+
+Compiled with problems:
+×
+ERROR in src/services/positionService.ts:43:5
+TS2322: Type 'unknown' is not assignable to type 'PositionData'.
+    41 |     const response = await axios.get(`${API_BASE_URL}/positions/${positionId}/interviewflow`);
+    42 |     console.log('Datos de posición obtenidos:', response.data);
+  > 43 |     return response.data;
+       |     ^^^^^^^^^^^^^^^^^^^^^
+    44 |   } catch (error) {
+    45 |     console.error('Error al obtener datos de la posición:', error);
+    46 |     throw new Error('Error al obtener datos de la posición');
+ERROR in src/services/positionService.ts:56:5
+TS2322: Type 'unknown' is not assignable to type 'Candidate[]'.
+    54 |     const response = await axios.get(`${API_BASE_URL}/positions/${positionId}/candidates`);
+    55 |     console.log('Candidatos obtenidos:', response.data);
+  > 56 |     return response.data;
+       |     ^^^^^^^^^^^^^^^^^^^^^
+    57 |   } catch (error) {
+    58 |     console.error('Error al obtener candidatos:', error);
+    59 |     throw new Error('Error al obtener candidatos');
+
+### **Prompt 13:**
+funciona bien, pero antes que sigas modificando, tienes que dejar las pantallas que corresponden y con el diseño y estilos correspondientes y originales. recuerda que la primera pagina q se muestra es el dashboard del reclutador y luego al presionar ver posiciones se muestran las posiciones con este diseño @old-positions.png . ahora sigues mostrando las pantallas de tests q utilizamos para corregir el router
+
+## **Prompt 14:**
+revisa las pantallas porque siguen sin el estilo original
+
 ## Conslusiones 🏁
 
 > Conclusión general sobre el proceso de desarrollo
