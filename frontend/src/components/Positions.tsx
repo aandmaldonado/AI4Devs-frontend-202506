@@ -22,8 +22,25 @@ const Positions: React.FC = () => {
         navigate(`/positions/${positionId}`);
     };
 
+    const handleBackToDashboard = () => {
+        navigate('/');
+    };
+
     return (
         <Container className="mt-5">
+            {/* Botón Volver */}
+            <Row className="mb-4">
+                <Col>
+                    <Button 
+                        variant="outline-secondary" 
+                        onClick={handleBackToDashboard}
+                        style={{ marginBottom: '20px' }}
+                    >
+                        ← Volver al Dashboard
+                    </Button>
+                </Col>
+            </Row>
+
             <h2 className="text-center mb-4">Posiciones</h2>
             <Row className="mb-4">
                 <Col md={3}>

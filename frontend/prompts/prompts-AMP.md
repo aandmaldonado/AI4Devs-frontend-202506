@@ -146,8 +146,47 @@ TS2322: Type 'unknown' is not assignable to type 'Candidate[]'.
 ### **Prompt 13:**
 funciona bien, pero antes que sigas modificando, tienes que dejar las pantallas que corresponden y con el diseño y estilos correspondientes y originales. recuerda que la primera pagina q se muestra es el dashboard del reclutador y luego al presionar ver posiciones se muestran las posiciones con este diseño @old-positions.png . ahora sigues mostrando las pantallas de tests q utilizamos para corregir el router
 
-## **Prompt 14:**
+### **Prompt 14:**
 revisa las pantallas porque siguen sin el estilo original
+
+### **Prompt 15:**
+cualquier posicion que presiona me envia a la posicion de Senior Backend Engineer revisa bien las rutas
+
+### **Prompt 16:**
+veo que las rutas cambian bien de la 1 a la 3 posicion pero visualmente siempre es la posicion de cualquier posicion de Senior Backend Engineer. seguramente debes generar data dummy para cada posicion. revisalo
+
+### **Prompt 17:**
+respeta los nombres de columnas en el tablero kaban y la forma de visualizar la puntuacion tal como se muestra en el diseño original @new-positions.png 
+
+### **Prompt 18:**
+revisalo de nuevo, son 4 columnas
+
+- LLamada telefónica
+- Entrevista técnica
+- Entrevista cultural
+- Entrevista manager
+
+@new-positions.png 
+
+### **Prompt 19:**
+la puntucion debe ser con circulos, por ejemplo una puntacion de 3 sería asi: 
+
+John Doe
+🟢🟢🟢
+
+deja puntuaciones random en la data dummy
+
+@new-positions.png 
+
+### **Prompt 20:**
+al arrastrar los candidatos a las distintas fases me arroja el error:
+
+Error al actualizar la etapa del candidato. Los cambios no se guardaron.
+
+creo q esta relacionado con que guarda en el backend, recuerda que no estamos usando backend, solo estamos revisando la interfaz con data dummy
+
+### **Prompt 21:**
+para mejorar la experiencia del usuario, agrega un boton volver en la pantalla de posiciones que te lleve al dashboard del reclutador
 
 ## Conslusiones 🏁
 

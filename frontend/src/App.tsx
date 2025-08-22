@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import Positions from './components/Positions';
 import RecruiterDashboard from './components/RecruiterDashboard';
@@ -15,9 +15,7 @@ import {
 
 // Componente para el detalle de posición con interfaz kanban
 const PositionDetail: React.FC = () => {
-  // Por ahora usamos window.location para obtener el ID
-  const pathParts = window.location.pathname.split('/');
-  const positionId = pathParts[pathParts.length - 1];
+  const { id } = useParams<{ id: string }>();
   
   // Estados para los datos
   const [positionData, setPositionData] = useState<PositionData | null>(null);
@@ -31,29 +29,40 @@ const PositionDetail: React.FC = () => {
 
   // Cargar datos al montar el componente
   useEffect(() => {
-    loadPositionData();
-  }, [positionId]);
+    if (id) {
+      loadPositionData();
+    }
+  }, [id]);
 
   const loadPositionData = async () => {
     try {
       setLoading(true);
       setError(null);
       
+      // Por ahora, cargar directamente datos dummy sin intentar conectar al backend
+      console.log('Cargando datos dummy para desarrollo...');
+      setPositionData(getDummyPositionData(parseInt(id!)));
+      setCandidates(getDummyCandidates(parseInt(id!)));
+      setError('Modo desarrollo: Usando datos de ejemplo. El backend no está disponible.');
+      
+      // Comentado temporalmente hasta que el backend esté disponible
+      /*
       // Intentar cargar datos reales de la API
       const [position, candidatesData] = await Promise.all([
-        getPositionData(parseInt(positionId)),
-        getCandidatesByPosition(parseInt(positionId))
+        getPositionData(parseInt(id!)),
+        getCandidatesByPosition(parseInt(id!))
       ]);
       
       setPositionData(position);
       setCandidates(candidatesData);
       console.log('Datos cargados exitosamente desde la API');
+      */
       
     } catch (error) {
       console.log('Error al cargar datos de la API, usando datos dummy:', error);
-      // En caso de error, cargar datos dummy
-      setPositionData(getDummyPositionData());
-      setCandidates(getDummyCandidates());
+      // En caso de error, cargar datos dummy específicos para esta posición
+      setPositionData(getDummyPositionData(parseInt(id!)));
+      setCandidates(getDummyCandidates(parseInt(id!)));
       setError('No se pudo conectar con el backend. Mostrando datos de ejemplo.');
     } finally {
       setLoading(false);
@@ -61,15 +70,17 @@ const PositionDetail: React.FC = () => {
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 4) return '#28a745'; // Verde
-    if (score >= 2) return '#ffc107'; // Amarillo
-    return '#dc3545'; // Rojo
+    if (score >= 4) return '🟢'; // Verde
+    if (score >= 2) return '🟡'; // Amarillo
+    return '🔴'; // Rojo
   };
 
-  const getScoreText = (score: number) => {
-    if (score >= 4) return 'Alto';
-    if (score >= 2) return 'Medio';
-    return 'Bajo';
+  const renderScore = (score: number) => {
+    const circles = [];
+    for (let i = 0; i < score; i++) {
+      circles.push(getScoreColor(score));
+    }
+    return circles.join('');
   };
 
   // Funciones de drag & drop
@@ -104,13 +115,16 @@ const PositionDetail: React.FC = () => {
           )
         );
 
+        console.log(`Candidato ${draggedCandidate} movido exitosamente a ${targetStepName}`);
+        
+        // Comentado temporalmente hasta que el backend esté disponible
+        /*
         // Intentar actualizar en el backend
         await updateCandidateStage(draggedCandidate, {
           applicationId: candidate.applicationId.toString(),
           currentInterviewStep: targetStepName
         });
-
-        console.log(`Candidato ${draggedCandidate} movido exitosamente a ${targetStepName}`);
+        */
         
       } catch (error) {
         console.error('Error al actualizar en el backend:', error);
@@ -139,6 +153,7 @@ const PositionDetail: React.FC = () => {
       <div style={{padding: '50px', textAlign: 'center', backgroundColor: '#f8f9fa', minHeight: '100vh'}}>
         <div style={{fontSize: '24px', color: '#6c757d'}}>🔄 Cargando datos...</div>
         <div style={{marginTop: '20px', color: '#6c757d'}}>Conectando con el backend...</div>
+        <div style={{marginTop: '10px', color: '#6c757d', fontSize: '14px'}}>ID de posición: {id}</div>
       </div>
     );
   }
@@ -147,6 +162,7 @@ const PositionDetail: React.FC = () => {
     return (
       <div style={{padding: '50px', textAlign: 'center', backgroundColor: '#f8f9fa', minHeight: '100vh'}}>
         <div style={{fontSize: '24px', color: '#dc3545'}}>❌ Error al cargar la posición</div>
+        <div style={{marginTop: '10px', color: '#6c757d'}}>ID de posición: {id}</div>
         <a href="/positions" style={{
           display: 'inline-block',
           padding: '15px 30px', 
@@ -186,6 +202,9 @@ const PositionDetail: React.FC = () => {
         <p style={{color: '#6c757d', fontSize: '16px'}}>Gestiona los candidatos por fase del proceso de contratación</p>
         <p style={{color: '#28a745', fontSize: '14px', marginTop: '10px'}}>
           💡 <strong>Drag & Drop:</strong> Arrastra los candidatos entre columnas para cambiar su fase
+        </p>
+        <p style={{color: '#6c757d', fontSize: '12px', marginTop: '5px'}}>
+          ID de posición: {id}
         </p>
         {error && (
           <div style={{
@@ -269,14 +288,11 @@ const PositionDetail: React.FC = () => {
                         {candidate.fullName}
                       </h4>
                       <div style={{
-                        backgroundColor: getScoreColor(candidate.averageScore),
-                        color: 'white',
-                        padding: '4px 8px',
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        display: 'inline-block'
+                        fontSize: '20px',
+                        textAlign: 'center',
+                        marginTop: '10px'
                       }}>
-                        Puntuación: {candidate.averageScore} ({getScoreText(candidate.averageScore)})
+                        {renderScore(candidate.averageScore)}
                       </div>
                     </div>
                   ))

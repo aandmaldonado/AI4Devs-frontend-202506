@@ -73,28 +73,75 @@ export const updateCandidateStage = async (candidateId: number, stageUpdate: Can
   }
 };
 
-// Función para manejar errores de API y devolver datos dummy
-export const getDummyPositionData = (): PositionData => {
-  console.log('Cargando datos dummy para desarrollo...');
-  return {
-    positionName: "Senior Backend Engineer",
-    interviewFlow: {
-      id: 1,
-      description: "Standard development interview process",
-      interviewSteps: [
-        { id: 1, name: "Initial Screening", orderIndex: 1 },
-        { id: 2, name: "Technical Interview", orderIndex: 2 },
-        { id: 3, name: "Manager Interview", orderIndex: 3 }
-      ]
+// Función para manejar errores de API y devolver datos dummy según la posición
+export const getDummyPositionData = (positionId: number): PositionData => {
+  console.log(`Cargando datos dummy para posición ${positionId}...`);
+  
+  const positions = {
+    1: {
+      positionName: "Senior Backend Engineer",
+      interviewFlow: {
+        id: 1,
+        description: "Standard development interview process",
+        interviewSteps: [
+          { id: 1, name: "LLamada telefónica", orderIndex: 1 },
+          { id: 2, name: "Entrevista técnica", orderIndex: 2 },
+          { id: 3, name: "Entrevista cultural", orderIndex: 3 },
+          { id: 4, name: "Entrevista manager", orderIndex: 4 }
+        ]
+      }
+    },
+    2: {
+      positionName: "Junior Android Engineer",
+      interviewFlow: {
+        id: 2,
+        description: "Mobile development interview process",
+        interviewSteps: [
+          { id: 1, name: "LLamada telefónica", orderIndex: 1 },
+          { id: 2, name: "Entrevista técnica", orderIndex: 2 },
+          { id: 3, name: "Entrevista cultural", orderIndex: 3 },
+          { id: 4, name: "Entrevista manager", orderIndex: 4 }
+        ]
+      }
+    },
+    3: {
+      positionName: "Product Manager",
+      interviewFlow: {
+        id: 3,
+        description: "Product management interview process",
+        interviewSteps: [
+          { id: 1, name: "LLamada telefónica", orderIndex: 1 },
+          { id: 2, name: "Entrevista técnica", orderIndex: 2 },
+          { id: 3, name: "Entrevista cultural", orderIndex: 3 },
+          { id: 4, name: "Entrevista manager", orderIndex: 4 }
+        ]
+      }
     }
   };
+
+  return positions[positionId as keyof typeof positions] || positions[1];
 };
 
-export const getDummyCandidates = (): Candidate[] => {
-  console.log('Cargando candidatos dummy para desarrollo...');
-  return [
-    { id: 1, fullName: "Jane Smith", currentInterviewStep: "Technical Interview", averageScore: 4, applicationId: 1 },
-    { id: 2, fullName: "Carlos García", currentInterviewStep: "Initial Screening", averageScore: 0, applicationId: 2 },
-    { id: 3, fullName: "John Doe", currentInterviewStep: "Manager Interview", averageScore: 5, applicationId: 3 }
-  ];
+export const getDummyCandidates = (positionId: number): Candidate[] => {
+  console.log(`Cargando candidatos dummy para posición ${positionId}...`);
+  
+  const candidatesByPosition = {
+    1: [ // Senior Backend Engineer
+      { id: 1, fullName: "Jane Smith", currentInterviewStep: "Entrevista técnica", averageScore: 4, applicationId: 1 },
+      { id: 2, fullName: "Carlos García", currentInterviewStep: "LLamada telefónica", averageScore: 2, applicationId: 2 },
+      { id: 3, fullName: "John Doe", currentInterviewStep: "Entrevista manager", averageScore: 5, applicationId: 3 }
+    ],
+    2: [ // Junior Android Engineer
+      { id: 4, fullName: "María López", currentInterviewStep: "LLamada telefónica", averageScore: 3, applicationId: 4 },
+      { id: 5, fullName: "David Chen", currentInterviewStep: "Entrevista técnica", averageScore: 1, applicationId: 5 },
+      { id: 6, fullName: "Ana Rodríguez", currentInterviewStep: "Entrevista cultural", averageScore: 4, applicationId: 6 }
+    ],
+    3: [ // Product Manager
+      { id: 8, fullName: "Sarah Johnson", currentInterviewStep: "LLamada telefónica", averageScore: 5, applicationId: 8 },
+      { id: 9, fullName: "Roberto Silva", currentInterviewStep: "Entrevista técnica", averageScore: 2, applicationId: 9 },
+      { id: 10, fullName: "Elena Fernández", currentInterviewStep: "Entrevista cultural", averageScore: 3, applicationId: 10 }
+    ]
+  };
+
+  return candidatesByPosition[positionId as keyof typeof candidatesByPosition] || candidatesByPosition[1];
 };
